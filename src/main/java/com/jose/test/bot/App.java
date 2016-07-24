@@ -2,16 +2,17 @@ package com.jose.test.bot;
 
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.handler.ContextHandler;
+import org.eclipse.jetty.servlet.ServletContextHandler;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 
 public class App
 {
     /**
      * port number for the jetty server.
      */
-    private static final int PORT = 8888;
+    private static final int PORT = 7070;
 
     /**
      * Security scheme to use.
@@ -21,11 +22,33 @@ public class App
 	private static final Logger log = LoggerFactory.getLogger(App.class);
 	
     public static void main(String[] args) throws Exception
-    {
-        Integer serverPort = Integer.valueOf(System.getenv("PORT"));
+    {    	
+    	Server server = new Server(PORT);
+
+    	ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+        context.addServlet(new ServletHolder(new HelloServlet()), "/hello");
+    	
+/*		Server server = new Server(8080);
+		ServletContextHandler handler = new ServletContextHandler(server, "/example");
+		handler.addServlet(HelloServlet.class, "/");
+		server.start();*/
+    	
+    	/*Server server = new Server(8080);
+ 
+        ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
+        context.setContextPath("/");
+        server.setHandler(context);
+ 
+        context.addServlet(new ServletHolder(new HelloServlet()),"/*");
+        context.addServlet(new ServletHolder(new HelloServlet("Buongiorno Mondo")),"/it/*");
+        context.addServlet(new ServletHolder(new HelloServlet("Bonjour le Monde")),"/fr/*");
+        
+        //Integer serverPort = Integer.valueOf(System.getenv("PORT"));
     	//Integer serverPort = Integer.valueOf(PORT);
     	    	
-        Server server = new Server(serverPort);
+        //Server server = new Server(8080);
 
         /*SslConnectionFactory sslConnectionFactory = new SslConnectionFactory();
         SslContextFactory sslContextFactory = sslConnectionFactory.getSslContextFactory();
@@ -45,14 +68,6 @@ public class App
         server.setConnectors(new Connector[] { serverConnector
         });*/
 
-        ContextHandler context = new ContextHandler();
-        context.setContextPath("/hello");
-        context.setResourceBase(".");
-        context.setClassLoader(Thread.currentThread().getContextClassLoader());
-        server.setHandler(context);
- 
-        context.setHandler(new HelloHandler());
-       
         server.start();
         server.join();
         log.info("Server running...");

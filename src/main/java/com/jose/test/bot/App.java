@@ -23,7 +23,8 @@ public class App
 	
     public static void main(String[] args) throws Exception
     {    	
-    	Server server = new Server(PORT);
+    	Integer serverPort = Integer.valueOf(System.getenv("PORT"));
+    	Server server = new Server(serverPort);
 
     	ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
         context.setContextPath("/");

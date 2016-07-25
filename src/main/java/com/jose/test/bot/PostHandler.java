@@ -28,13 +28,11 @@ public class PostHandler extends ContextHandler {
     @Override
     public void doHandle(String target, Request baseRequest, HttpServletRequest request,
         HttpServletResponse response) throws IOException, ServletException {
-    	
-      System.out.println(request.getMethod());
       
       ServletInputStream inputStream = request.getInputStream();
 		
       String result = new BufferedReader(new InputStreamReader(inputStream))
-				  .lines().collect(Collectors.joining("\n"));
+				  .lines().collect(Collectors.joining("\t"));
       
       System.out.println(result);
       

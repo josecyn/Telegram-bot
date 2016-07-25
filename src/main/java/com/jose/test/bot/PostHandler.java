@@ -33,13 +33,13 @@ public class PostHandler extends ContextHandler {
       String result = new BufferedReader(new InputStreamReader(inputStream))
 				  .lines().collect(Collectors.joining("\n"));
       
-      JSONObject obj = new JSONObject(result);
-      String username = obj.getString("username");
+      //JSONObject obj = new JSONObject(result);
+      //String username = obj.getString("username");
       
-      System.out.println("Username: "+username);
+      //System.out.println("Username: "+username);
 
       response.setStatus(HttpStatus.OK_200);
-      response.getWriter().println(username);
+      response.getWriter().println(result);
 
       baseRequest.setHandled(true);
     }

@@ -24,8 +24,13 @@ public class App
 	
     public static void main(String[] args) throws Exception
     {    	
-    	//Integer serverPort = Integer.valueOf(System.getenv("PORT"));
-    	Integer serverPort = 8080;
+    	Integer serverPort = null;
+    	String systemPort = System.getenv("PORT");
+    	if (systemPort != null && systemPort.length() > 0)
+    		serverPort = Integer.valueOf(systemPort);
+    	else
+    		serverPort = 8080;
+    	
     	Server server = new Server(serverPort);
 
     	ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);

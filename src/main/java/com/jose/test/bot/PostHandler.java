@@ -38,10 +38,11 @@ public class PostHandler extends ContextHandler {
       
       Long chatid = null;
       try {
-	      JSONObject obj = new JSONObject(result);
-	      JSONArray resultArray = obj.getJSONArray("result");
-	      JSONObject update = resultArray.getJSONObject(0);
-	      JSONObject message = update.getJSONObject("message");
+	      //JSONObject obj = new JSONObject(result);
+	      //JSONArray resultArray = obj.getJSONArray("result");
+	      //JSONObject update = resultArray.getJSONObject(0);
+    	  JSONObject jsonResponse = new JSONObject(result);
+	      JSONObject message = jsonResponse.getJSONObject("message");
 	      JSONObject chat = message.getJSONObject("chat");
 	      chatid = chat.getLong("id");
       }

@@ -1,0 +1,1 @@
+{"update_id":139281066,	"message":{"message_id":15,"from":{"id":255000411,"first_name":"Jose Carlos","last_name":"Yanez","username":"josecyn"},"chat":{"id":255000411,"first_name":"Jose Carlos","last_name":"Yanez","username":"josecyn","type":"private"},"date":1469485236,"text":"\/test1","entities":[{"type":"bot_command","offset":0,"length":6}]}}

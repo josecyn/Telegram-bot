@@ -36,6 +36,8 @@ public class PostHandler extends ContextHandler {
       String result = new BufferedReader(new InputStreamReader(inputStream))
 				  .lines().collect(Collectors.joining("\n"));
       
+      System.out.println(result);
+      
       Long chatid = null;
       try {
 	      JSONObject obj = new JSONObject(result);
